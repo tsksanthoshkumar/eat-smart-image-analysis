@@ -3,7 +3,9 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { NutritionData } from '@/types/nutrition';
-import { Loader2, Zap, Apple, Beef, Droplets } from 'lucide-react';
+import { Loader2, Zap, Apple, Beef, Droplets, MapPin } from 'lucide-react';
+import { isIndianFood, getAllIndianFoods } from '@/services/foodRecognition';
+import { getRelatedIndianFoods, getNutritionalCategory } from '@/utils/indianFoodHelper';
 
 interface NutritionDisplayProps {
   data: NutritionData | null;
@@ -26,6 +28,9 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
             <p className="text-sm text-gray-600">
               Our AI is identifying the food and calculating nutrition facts
             </p>
+            <p className="text-xs text-orange-600 mt-1">
+              Enhanced recognition for Indian cuisine
+            </p>
           </div>
         </div>
       </Card>
@@ -46,6 +51,9 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
             <p className="text-sm text-gray-500">
               Upload a food image to see detailed nutrition information
             </p>
+            <p className="text-xs text-orange-600 mt-1">
+              🇮🇳 Specialized in Indian cuisine recognition
+            </p>
           </div>
         </div>
       </Card>
@@ -53,6 +61,9 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
   }
 
   const { foodName, confidence, nutrition } = data;
+  const isIndian = isIndianFood(foodName);
+  const relatedFoods = getRelatedIndianFoods(foodName);
+  const nutritionalCategory = getNutritionalCategory(foodName);
 
   const macronutrients = [
     {
@@ -78,12 +89,23 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
     },
   ];
 
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'highProtein': return 'bg-red-100 text-red-800 border-red-200';
+      case 'highFiber': return 'bg-green-100 text-green-800 border-green-200';
+      case 'lowCalorie': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'balanced': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'indulgent': return 'bg-orange-100 text-orange-800 border-orange-200';
+      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Food Identification */}
       <Card className="p-6 bg-white/80 backdrop-blur-sm border-green-200">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex items-center justify-center gap-2 mb-3 flex-wrap">
             <h2 className="text-2xl font-bold text-gray-900">{foodName}</h2>
             <Badge 
               variant="secondary" 
@@ -91,10 +113,27 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
             >
               {Math.round(confidence * 100)}% confidence
             </Badge>
+            {isIndian && (
+              <Badge 
+                variant="secondary" 
+                className="bg-orange-100 text-orange-800 border-orange-200"
+              >
+                <MapPin className="h-3 w-3 mr-1" />
+                Indian Cuisine
+              </Badge>
+            )}
           </div>
           <p className="text-sm text-gray-600">
             Serving size: {nutrition.servingSize} ({nutrition.servingWeight}g)
           </p>
+          {nutritionalCategory !== 'standard' && (
+            <Badge 
+              variant="outline" 
+              className={`mt-2 ${getCategoryColor(nutritionalCategory)}`}
+            >
+              {nutritionalCategory.replace(/([A-Z])/g, ' $1').toLowerCase()}
+            </Badge>
+          )}
         </div>
       </Card>
 
@@ -138,6 +177,24 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
           </div>
         </div>
       </Card>
+
+      {/* Related Foods (for Indian cuisine) */}
+      {isIndian && relatedFoods.length > 0 && (
+        <Card className="p-6 bg-white/80 backdrop-blur-sm border-orange-200">
+          <h3 className="font-semibold text-gray-900 mb-3">Commonly served with</h3>
+          <div className="flex flex-wrap gap-2">
+            {relatedFoods.map((food) => (
+              <Badge 
+                key={food}
+                variant="outline" 
+                className="bg-orange-50 text-orange-700 border-orange-200"
+              >
+                {food}
+              </Badge>
+            ))}
+          </div>
+        </Card>
+      )}
     </div>
   );
 };
