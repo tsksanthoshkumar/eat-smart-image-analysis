@@ -245,6 +245,16 @@ export const nutritionDatabase: Record<string, {
     servingSize: '1 piece (Medu Vada)',
     servingWeight: 100,
   },
+  'Vada Pav': {
+    calories: 320,
+    carbohydrates: 42.5,
+    proteins: 6.5,
+    fats: 17.5,
+    fiber: 3.5,
+    sugar: 4.0,
+    servingSize: '1 serving',
+    servingWeight: 120,
+  },
   'Dosa': {
     calories: 240,
     carbohydrates: 35.0,
