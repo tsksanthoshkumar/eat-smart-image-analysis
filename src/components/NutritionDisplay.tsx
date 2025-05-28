@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -99,6 +100,8 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
       case 'lowCalorie': return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'balanced': return 'bg-purple-100 text-purple-800 border-purple-200';
       case 'indulgent': return 'bg-orange-100 text-orange-800 border-orange-200';
+      case 'streetFood': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'healthy': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
@@ -211,41 +214,4 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
       )}
     </div>
   );
-};
-
-const macronutrients = [
-  {
-    name: 'Carbohydrates',
-    value: data?.nutrition.carbohydrates || 0,
-    unit: 'g',
-    color: 'bg-orange-500',
-    icon: Apple,
-  },
-  {
-    name: 'Proteins',
-    value: data?.nutrition.proteins || 0,
-    unit: 'g',
-    color: 'bg-red-500',
-    icon: Beef,
-  },
-  {
-    name: 'Fats',
-    value: data?.nutrition.fats || 0,
-    unit: 'g',
-    color: 'bg-yellow-500',
-    icon: Droplets,
-  },
-];
-
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case 'highProtein': return 'bg-red-100 text-red-800 border-red-200';
-    case 'highFiber': return 'bg-green-100 text-green-800 border-green-200';
-    case 'lowCalorie': return 'bg-blue-100 text-blue-800 border-blue-200';
-    case 'balanced': return 'bg-purple-100 text-purple-800 border-purple-200';
-    case 'indulgent': return 'bg-orange-100 text-orange-800 border-orange-200';
-    case 'streetFood': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    case 'healthy': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-    default: return 'bg-gray-100 text-gray-800 border-gray-200';
-  }
 };

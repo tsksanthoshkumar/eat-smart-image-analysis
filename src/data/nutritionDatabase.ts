@@ -1,3 +1,4 @@
+
 // Comprehensive nutrition database based on USDA data
 export const nutritionDatabase: Record<string, {
   calories: number;
@@ -94,6 +95,16 @@ export const nutritionDatabase: Record<string, {
     servingSize: '3.5 oz (100g)',
     servingWeight: 100,
   },
+  'Chicken Leg Piece': {
+    calories: 250,
+    carbohydrates: 0.0,
+    proteins: 26.0,
+    fats: 15.5,
+    fiber: 0.0,
+    sugar: 0.0,
+    servingSize: '1 leg piece',
+    servingWeight: 120,
+  },
   'Salmon': {
     calories: 208,
     carbohydrates: 0.0,
@@ -113,6 +124,26 @@ export const nutritionDatabase: Record<string, {
     sugar: 1.1,
     servingSize: '2 large eggs',
     servingWeight: 100,
+  },
+  'Boiled Egg': {
+    calories: 68,
+    carbohydrates: 0.6,
+    proteins: 6.0,
+    fats: 5.0,
+    fiber: 0.0,
+    sugar: 0.0,
+    servingSize: '1 large egg',
+    servingWeight: 50,
+  },
+  'Half Boiled Egg': {
+    calories: 34,
+    carbohydrates: 0.3,
+    proteins: 3.0,
+    fats: 2.5,
+    fiber: 0.0,
+    sugar: 0.0,
+    servingSize: '1/2 large egg',
+    servingWeight: 25,
   },
 
   // Grains
@@ -223,7 +254,8 @@ export const nutritionDatabase: Record<string, {
     servingWeight: 115,
   },
 
-  // EXPANDED INDIAN FOODS SECTION
+  // ENHANCED INDIAN FOODS SECTION
+  
   // South Indian Foods
   'Idli': {
     calories: 39,
@@ -325,6 +357,16 @@ export const nutritionDatabase: Record<string, {
     servingSize: '1 cup',
     servingWeight: 200,
   },
+  'Dosa with Curries': {
+    calories: 320,
+    carbohydrates: 45.0,
+    proteins: 8.0,
+    fats: 12.0,
+    fiber: 4.0,
+    sugar: 3.0,
+    servingSize: '1 dosa + 3 curries',
+    servingWeight: 250,
+  },
 
   // North Indian Foods
   'Chicken Biryani': {
@@ -356,16 +398,6 @@ export const nutritionDatabase: Record<string, {
     sugar: 2.0,
     servingSize: '1 cup',
     servingWeight: 200,
-  },
-  'Boiled Egg': {
-    calories: 68,
-    carbohydrates: 0.6,
-    proteins: 6.0,
-    fats: 5.0,
-    fiber: 0.0,
-    sugar: 0.0,
-    servingSize: '1 large egg',
-    servingWeight: 50,
   },
   'Paneer Curry with Chapati': {
     calories: 540,
@@ -469,6 +501,16 @@ export const nutritionDatabase: Record<string, {
     servingSize: '1/2 cup',
     servingWeight: 100,
   },
+  'Dal and Rice': {
+    calories: 240,
+    carbohydrates: 45.0,
+    proteins: 9.0,
+    fats: 3.0,
+    fiber: 6.0,
+    sugar: 2.0,
+    servingSize: '1 plate',
+    servingWeight: 200,
+  },
 
   // Rice and Breads
   'Basmati Rice': {
@@ -500,6 +542,16 @@ export const nutritionDatabase: Record<string, {
     sugar: 0.4,
     servingSize: '1 medium chapati',
     servingWeight: 40,
+  },
+  'Chapati with Curry': {
+    calories: 320,
+    carbohydrates: 38.0,
+    proteins: 12.0,
+    fats: 14.0,
+    fiber: 4.5,
+    sugar: 3.5,
+    servingSize: '2 chapati + curry',
+    servingWeight: 180,
   },
   'Naan': {
     calories: 262,
@@ -738,94 +790,6 @@ export const nutritionDatabase: Record<string, {
     servingWeight: 50,
   },
 
-  // ENHANCED ENTRIES FOR USER'S SPECIFIC FOODS
-  
-  // Street Food (Enhanced)
-  'Pani Puri': {
-    calories: 36,
-    carbohydrates: 6.0,
-    proteins: 1.0,
-    fats: 1.0,
-    fiber: 0.5,
-    sugar: 1.0,
-    servingSize: '1 piece',
-    servingWeight: 15,
-  },
-  'Sev Puri': {
-    calories: 170,
-    carbohydrates: 22.0,
-    proteins: 3.5,
-    fats: 8.0,
-    fiber: 2.5,
-    sugar: 6.0,
-    servingSize: '1 serving (6 pieces)',
-    servingWeight: 80,
-  },
-
-  // Enhanced Combination Dishes
-  'Dal and Rice': {
-    calories: 240,
-    carbohydrates: 45.0,
-    proteins: 9.0,
-    fats: 3.0,
-    fiber: 6.0,
-    sugar: 2.0,
-    servingSize: '1 plate',
-    servingWeight: 200,
-  },
-  'Chapati with Curry': {
-    calories: 320,
-    carbohydrates: 38.0,
-    proteins: 12.0,
-    fats: 14.0,
-    fiber: 4.5,
-    sugar: 3.5,
-    servingSize: '2 chapati + curry',
-    servingWeight: 180,
-  },
-  'Dosa with Curries': {
-    calories: 320,
-    carbohydrates: 45.0,
-    proteins: 8.0,
-    fats: 12.0,
-    fiber: 4.0,
-    sugar: 3.0,
-    servingSize: '1 dosa + 3 curries',
-    servingWeight: 250,
-  },
-
-  // Enhanced Protein Items
-  'Chicken Breast': {
-    calories: 165,
-    carbohydrates: 0.0,
-    proteins: 31.0,
-    fats: 3.6,
-    fiber: 0.0,
-    sugar: 0.0,
-    servingSize: '3.5 oz (100g)',
-    servingWeight: 100,
-  },
-  'Chicken Leg Piece': {
-    calories: 250,
-    carbohydrates: 0.0,
-    proteins: 26.0,
-    fats: 15.5,
-    fiber: 0.0,
-    sugar: 0.0,
-    servingSize: '1 leg piece',
-    servingWeight: 120,
-  },
-  'Half Boiled Egg': {
-    calories: 34,
-    carbohydrates: 0.3,
-    proteins: 3.0,
-    fats: 2.5,
-    fiber: 0.0,
-    sugar: 0.0,
-    servingSize: '1/2 large egg',
-    servingWeight: 25,
-  },
-
   // Enhanced Healthy Options
   'Salad': {
     calories: 120,
@@ -856,59 +820,5 @@ export const nutritionDatabase: Record<string, {
     sugar: 6.0,
     servingSize: '1 bowl',
     servingWeight: 140,
-  },
-
-  // Enhanced Biryani Variants
-  'Chicken Biryani': {
-    calories: 290,
-    carbohydrates: 30.0,
-    proteins: 15.0,
-    fats: 12.0,
-    fiber: 2.0,
-    sugar: 1.0,
-    servingSize: '1 cup',
-    servingWeight: 200,
-  },
-
-  // Enhanced South Indian Items
-  'Idli': {
-    calories: 39,
-    carbohydrates: 8.2,
-    proteins: 1.7,
-    fats: 0.3,
-    fiber: 0.8,
-    sugar: 0.1,
-    servingSize: '1 piece',
-    servingWeight: 30,
-  },
-  'Samosa': {
-    calories: 91,
-    carbohydrates: 8.5,
-    proteins: 2.1,
-    fats: 5.2,
-    fiber: 1.0,
-    sugar: 0.6,
-    servingSize: '1 small samosa',
-    servingWeight: 30,
-  },
-  'Banana': {
-    calories: 105,
-    carbohydrates: 27.0,
-    proteins: 1.3,
-    fats: 0.4,
-    fiber: 3.1,
-    sugar: 14.4,
-    servingSize: '1 medium banana',
-    servingWeight: 118,
-  },
-  'Medu Vada': {
-    calories: 290,
-    carbohydrates: 28.0,
-    proteins: 8.0,
-    fats: 17.0,
-    fiber: 4.0,
-    sugar: 2.0,
-    servingSize: '1 piece',
-    servingWeight: 100,
   },
 };
