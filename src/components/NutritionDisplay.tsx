@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { NutritionData } from '@/types/nutrition';
-import { Loader2, Zap, Apple, Beef, Droplets, MapPin } from 'lucide-react';
-import { isIndianFood, getAllIndianFoods } from '@/services/foodRecognition';
+import { Loader2, Zap, Apple, Beef, Droplets, MapPin, Star } from 'lucide-react';
+import { isIndianFood, getAllIndianFoods, isPriorityFood } from '@/services/foodRecognition';
 import { getRelatedIndianFoods, getNutritionalCategory } from '@/utils/indianFoodHelper';
 
 interface NutritionDisplayProps {
@@ -29,7 +28,7 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
               Our AI is identifying the food and calculating nutrition facts
             </p>
             <p className="text-xs text-orange-600 mt-1">
-              Enhanced recognition for Indian cuisine
+              🇮🇳 Enhanced recognition for Indian cuisine & your favorite foods
             </p>
           </div>
         </div>
@@ -54,6 +53,9 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
             <p className="text-xs text-orange-600 mt-1">
               🇮🇳 Specialized in Indian cuisine recognition
             </p>
+            <p className="text-xs text-blue-600 mt-1">
+              ⭐ Enhanced for: Pani Puri, Sev Puri, Biryani, Idli, Dosa & more!
+            </p>
           </div>
         </div>
       </Card>
@@ -62,6 +64,7 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
 
   const { foodName, confidence, nutrition } = data;
   const isIndian = isIndianFood(foodName);
+  const isPriority = isPriorityFood(foodName);
   const relatedFoods = getRelatedIndianFoods(foodName);
   const nutritionalCategory = getNutritionalCategory(foodName);
 
@@ -122,6 +125,15 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
                 Indian Cuisine
               </Badge>
             )}
+            {isPriority && (
+              <Badge 
+                variant="secondary" 
+                className="bg-blue-100 text-blue-800 border-blue-200"
+              >
+                <Star className="h-3 w-3 mr-1" />
+                Enhanced Recognition
+              </Badge>
+            )}
           </div>
           <p className="text-sm text-gray-600">
             Serving size: {nutrition.servingSize} ({nutrition.servingWeight}g)
@@ -178,10 +190,12 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
         </div>
       </Card>
 
-      {/* Related Foods (for Indian cuisine) */}
-      {isIndian && relatedFoods.length > 0 && (
+      {/* Related Foods (enhanced for priority foods) */}
+      {(isIndian || isPriority) && relatedFoods.length > 0 && (
         <Card className="p-6 bg-white/80 backdrop-blur-sm border-orange-200">
-          <h3 className="font-semibold text-gray-900 mb-3">Commonly served with</h3>
+          <h3 className="font-semibold text-gray-900 mb-3">
+            {isPriority ? 'Perfect combinations' : 'Commonly served with'}
+          </h3>
           <div className="flex flex-wrap gap-2">
             {relatedFoods.map((food) => (
               <Badge 
@@ -197,4 +211,41 @@ export const NutritionDisplay: React.FC<NutritionDisplayProps> = ({
       )}
     </div>
   );
+};
+
+const macronutrients = [
+  {
+    name: 'Carbohydrates',
+    value: data?.nutrition.carbohydrates || 0,
+    unit: 'g',
+    color: 'bg-orange-500',
+    icon: Apple,
+  },
+  {
+    name: 'Proteins',
+    value: data?.nutrition.proteins || 0,
+    unit: 'g',
+    color: 'bg-red-500',
+    icon: Beef,
+  },
+  {
+    name: 'Fats',
+    value: data?.nutrition.fats || 0,
+    unit: 'g',
+    color: 'bg-yellow-500',
+    icon: Droplets,
+  },
+];
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'highProtein': return 'bg-red-100 text-red-800 border-red-200';
+    case 'highFiber': return 'bg-green-100 text-green-800 border-green-200';
+    case 'lowCalorie': return 'bg-blue-100 text-blue-800 border-blue-200';
+    case 'balanced': return 'bg-purple-100 text-purple-800 border-purple-200';
+    case 'indulgent': return 'bg-orange-100 text-orange-800 border-orange-200';
+    case 'streetFood': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+    case 'healthy': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+    default: return 'bg-gray-100 text-gray-800 border-gray-200';
+  }
 };
